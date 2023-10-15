@@ -6,6 +6,7 @@ run-name: 'Expressions & Contexts by @${{ github.actor }}, event: ${{ github.eve
 
 jobs:
   using-expressions-and-contexts:
+    if: contains(fromJson('["issues", "pull_request"]'), github.event_name)
     runs-on: ubuntu-latest
     steps:
       - name: Expressions
