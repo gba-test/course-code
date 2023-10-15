@@ -1,0 +1,32 @@
+name: Dynamic Matrix
+
+on:
+  workflow_dispatch:
+    inputs:
+      os:
+        description: Operating Systems
+        default: "windows-latest, ubuntu-latest"
+        type: string
+      node-version:
+        description: Node Version
+        default: "14, 15, 16"
+        type: string
+
+jobs:
+  prepare-matrix:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo ${{ inputs.os }}, ${{ inputs.node-version }}
+#  node-matrix:
+#    runs-on: ${{ matrix.os }}
+#    strategy:
+#      matrix:
+#        os: [ubuntu-latest, windows-latest]
+#        node-version: [14, 15, 16]
+#    steps:
+#      - run: node -v
+#      - uses: actions/setup-node@v3
+#        with:
+#          node-version: ${{ matrix.node-version }}
+#      - run: node -v
