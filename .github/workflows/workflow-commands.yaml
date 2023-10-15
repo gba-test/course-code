@@ -16,3 +16,20 @@ jobs:
         run: echo "::warning title=Warining title,file=app.js,line=2,endLine=3,col=5,endColumn=7::Missing Semicolon"
       - name: Setting an error message with params
         run: echo "::notice title=Notice title,file=app.js,line=2,endLine=3,col=5,endColumn=7::Missing Semicolon"
+      - name: Group of logs
+        run: |
+          echo "::group::My group title"
+          echo "Inside group"
+          echo "::endgroup::"
+      - name: Masking a value
+        run: echo "::add-mask::Secret String"
+      - name: Echo a secret
+        run: echo "Secret String"
+      - name: Echo a secret - GBA1 version
+        run: echo "lala Secret String"
+      - name: Echo a secret - GBA2 version
+        run: echo "lalaSecret String"
+      - name: Echo a secret - GBA3 version
+        run: echo "Secret Stringlala"
+      - name: Echo a secret - GBA4 version
+        run: echo "Secret String lala"
