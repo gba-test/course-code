@@ -1,0 +1,26 @@
+name: Caching & Artifacts
+
+on:
+  push
+
+jobs:
+  use-axios:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - uses: actions/cache@v3
+        with:
+          path: ./node_modules
+          key: cache-node_modules
+      - run: yarn
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            const axios = require('axios');
+
+            const url = 'https://official-joke-api.appspot.com/random_joke'
+            
+            axios.get(url).then(res => console.log(res.data))

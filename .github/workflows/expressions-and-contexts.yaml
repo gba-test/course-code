@@ -6,7 +6,7 @@ run-name: 'Expressions & Contexts by @${{ github.actor }}, event: ${{ github.eve
 
 jobs:
   using-expressions-and-contexts:
-    if: github.event_name == 'push'
+    if: contains(fromJson('["issues", "pull_request"]'), github.event_name)
     runs-on: ubuntu-latest
     steps:
       - name: Expressions
@@ -21,8 +21,21 @@ jobs:
           echo ${{ true && false }}
       - name: Dump Contexts
         run: |
-          echo '${{ toJson(github) }}'
-          echo '${{ toJson(job) }}'
-          echo '${{ toJson(secrets) }}'
-          echo '${{ toJson(steps) }}'
-          echo '${{ toJson(runner) }}'
+          cat <<EOF
+          ${{ toJson(github.event.pull_request.labels[*].name) }}'
+          EOF
+#          cat <<EOF
+#          ${{ toJson(github) }}'
+#          EOF
+#          cat <<EOF
+#          ${{ toJson(job) }}
+#          EOF
+#          cat <<EOF
+#          ${{ toJson(secrets) }}
+#          EOF
+#          cat <<EOF
+#          ${{ toJson(steps) }}
+#          EOF
+#          cat <<EOF
+#          ${{ toJson(runner) }}
+#          EOF
